@@ -22,7 +22,9 @@ const Feed = () => {
 	const [post, setPost] = useState([]);
 
 	const [filteredPosts, setFilteredPosts] = useState([]); // store the filtered posts
+	// const [tagText, setTagText] = useState(''); // store the tag text
 
+	// handle the search input change
 	const handleSearchChange = (e) => {
 		const text = e.target.value.toLowerCase();
 
@@ -50,6 +52,19 @@ const Feed = () => {
 		fetchPost();
 	}, []);
 
+	const handleTagClick = (tag) => {
+		setSearchText(tag);
+		setFilteredPosts(
+			post.filter((p) => {
+				return (
+					p.prompt.toLowerCase().includes(tag) ||
+					p.creator.username.toLowerCase().includes(tag) ||
+					p.tag.toLowerCase().includes(tag)
+				);
+			})
+		);
+	};
+
 	return (
 		<section className='feed'>
 			<form className='relative w-full flex-center'>
@@ -64,7 +79,7 @@ const Feed = () => {
 			</form>
 			<PromptCardList
 				data={searchText.length === 0 ? post : filteredPosts}
-				handleTagClick={() => {}}
+				handleTagClick={handleTagClick}
 			/>
 		</section>
 	);
