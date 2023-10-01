@@ -22,18 +22,17 @@ const Feed = () => {
 	const [post, setPost] = useState([]);
 
 	const [filteredPosts, setFilteredPosts] = useState([]); // store the filtered posts
-	// const [tagText, setTagText] = useState(''); // store the tag text
 
 	// handle the search input change
 	const handleSearchChange = (e) => {
-		const text = e.target.value.toLowerCase();
+		const text = e.target.value;
 
 		setFilteredPosts(
 			post.filter((p) => {
 				return (
-					p.prompt.toLowerCase().includes(text) ||
-					p.creator.username.toLowerCase().includes(text) ||
-					p.tag.toLowerCase().includes(text)
+					p.prompt.toLowerCase().includes(text.toLowerCase()) ||
+					p.creator.username.toLowerCase().includes(text.toLowerCase()) ||
+					p.tag.toLowerCase().includes(text.toLowerCase())
 				);
 			})
 		);
@@ -57,9 +56,9 @@ const Feed = () => {
 		setFilteredPosts(
 			post.filter((p) => {
 				return (
-					p.prompt.toLowerCase().includes(tag) ||
-					p.creator.username.toLowerCase().includes(tag) ||
-					p.tag.toLowerCase().includes(tag)
+					p.prompt.toLowerCase().includes(tag.toLowerCase()) ||
+					p.creator.username.toLowerCase().includes(tag.toLowerCase()) ||
+					p.tag.toLowerCase().includes(tag.toLowerCase())
 				);
 			})
 		);
